@@ -1,20 +1,23 @@
-# Creating Custom Annotations
+/**
+ * 
+ */
+package com.thirumal.aspect;
 
-1. Enable `@EnableAspectJAutoProxy` by adding this annotation to the project.
+import java.time.Duration;
+import java.time.OffsetDateTime;
 
-2. Create an interface `MeasureExecutionTime` that you want to use it as annotation
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-```java
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface MeasureExecutionTime {
-	 String value() default "";
-}
-```
+import com.thirumal.annotation.MeasureExecutionTime;
 
-3. Create aspect 
-
-```java
+/**
+ * @author Thirumal
+ */
 @Aspect
 @Component
 public class ExecutionTimeAspect {
@@ -34,15 +37,3 @@ public class ExecutionTimeAspect {
     }
 	
 }
-```
-
-4. Use the annotation
-
-```java
-@MeasureExecutionTime
-@GetMapping("")
-public String annotaion() {
-	return annotationService.get();
-}
-```
-
